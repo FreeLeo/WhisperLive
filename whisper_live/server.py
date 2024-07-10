@@ -790,7 +790,7 @@ class ServeClientFasterWhisper(ServeClientBase):
         self.no_speech_thresh = 0.45
 
         device = "cuda" if torch.cuda.is_available() else "cpu"
-
+        logging.info(f"ServeClientFasterWhisper init1, single_model={single_model}, {self.model_size_or_path}")
         if self.model_size_or_path is None:
             return
 
@@ -804,7 +804,7 @@ class ServeClientFasterWhisper(ServeClientBase):
             self.create_model(device)
 
         self.use_vad = use_vad
-        logging.info(f"ServeClientFasterWhisper init, single_model={single_model}, {self.model_size_or_path}")
+        logging.info(f"ServeClientFasterWhisper init2, single_model={single_model}, {self.model_size_or_path}")
         # threading
         self.trans_thread = threading.Thread(target=self.speech_to_text)
         self.trans_thread.start()
