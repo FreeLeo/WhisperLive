@@ -185,6 +185,7 @@ class TranscriptionServer:
             if faster_whisper_custom_model_path is not None and os.path.exists(faster_whisper_custom_model_path):
                 logging.info(f"Using custom model {faster_whisper_custom_model_path}")
                 options["model"] = faster_whisper_custom_model_path
+            logging.info("Create ServeClientFasterWhisper")
             client = ServeClientFasterWhisper(
                 websocket,
                 language=options["language"],
@@ -777,6 +778,7 @@ class ServeClientFasterWhisper(ServeClientBase):
             "tiny", "tiny.en", "base", "base.en", "small", "small.en",
             "medium", "medium.en", "large-v2", "large-v3",
         ]
+        logging.info(f"ServeClientFasterWhisper init, model={model}")
         if not os.path.exists(model):
             self.model_size_or_path = self.check_valid_model(model)
         else:
