@@ -804,7 +804,7 @@ class ServeClientFasterWhisper(ServeClientBase):
             self.create_model(device)
 
         self.use_vad = use_vad
-
+        logging.info(f"ServeClientFasterWhisper init, single_model={single_model}, {self.model_size_or_path}")
         # threading
         self.trans_thread = threading.Thread(target=self.speech_to_text)
         self.trans_thread.start()
