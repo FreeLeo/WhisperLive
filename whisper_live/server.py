@@ -296,6 +296,7 @@ class TranscriptionServer:
         self.backend = backend
         if not self.handle_new_connection(websocket, faster_whisper_custom_model_path,
                                           whisper_tensorrt_path, trt_multilingual):
+            logging.info("Handle new connection failed.")
             return
 
         try:
