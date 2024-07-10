@@ -131,7 +131,7 @@ class WhisperModel:
                 local_files_only=local_files_only,
                 cache_dir=download_root,
             )
-
+        logging.info(f"WhisperMoedl init, model_path={model_path}")
         self.model = ctranslate2.models.Whisper(
             model_path,
             device=device,
@@ -140,7 +140,7 @@ class WhisperModel:
             intra_threads=cpu_threads,
             inter_threads=num_workers,
         )
-
+        logging.info(f"WhisperMoedl init2")
         tokenizer_file = os.path.join(model_path, "tokenizer.json")
         if os.path.isfile(tokenizer_file):
             self.hf_tokenizer = tokenizers.Tokenizer.from_file(tokenizer_file)
@@ -148,7 +148,7 @@ class WhisperModel:
             self.hf_tokenizer = tokenizers.Tokenizer.from_pretrained(
                 "openai/whisper-tiny" + ("" if self.model.is_multilingual else ".en")
             )
-
+        logging.info(f"WhisperMoedl init3, {self.hf_tokenizer}")
         self.feat_kwargs = self._get_feature_kwargs(model_path)
         self.feature_extractor = FeatureExtractor(**self.feat_kwargs)
         self.num_samples_per_token = self.feature_extractor.hop_length * 2
