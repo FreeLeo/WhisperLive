@@ -298,7 +298,7 @@ class TranscriptionServer:
                                           whisper_tensorrt_path, trt_multilingual):
             logging.info("Handle new connection failed.")
             return
-
+        logging.info("Handle new connection success.")
         try:
             while not self.client_manager.is_client_timeout(websocket):
                 if not self.process_audio_frames(websocket):
